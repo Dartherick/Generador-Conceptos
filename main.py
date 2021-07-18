@@ -5,15 +5,19 @@ class GeneradorConceptos():
     def __init__(self,Path):
         self.Path = Path
     
-    def FindFolders(self):
-        self.Folders = []
+    def FindCategories(self):
+        self.Categories = {}
         for File in os.listdir(self.Path):
             if not('.' in File):
-                self.Folders.append(File)
+                self.Categories[File] = []
 
-        print(self.Folders)
-
-        #print(os.listdir(os.path.join(self.Path,self.Folders[0])))
+    def FindSubCategories(self):
+        for i in self.Categories.keys():
+            for File in os.listdir(os.path.join(self.Path,i)):
+                if not('.' in File):
+                    self.Categories[i].append(File)
 
 Maldito = GeneradorConceptos('C:/Users/darth/Downloads/Trimestre 11')
-Maldito.FindFolders()
+Maldito.FindCategories()
+Maldito.FindSubCategories()
+print(Maldito.Categories)
